@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 引入vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+</head>
+
+<body><!-- 055 -->
+
+<div id="root">
+    
+</div>
+
+</body>
+<script>
+    //定義student組件
+    let student = Vue.extend({
+        template:`
+        <div>
+            <h2>學校姓名:{{name}}</h2>
+            <h2>學校年齡:{{age}}</h2>
+        </div>
+        `,
+        data(){
+            return {
+            name:'汩汩',
+            age:18
+            }    
+        },     
+    })
+    //定義school組件
+    let school = Vue.extend({
+        template:`
+        <div>
+            <h2>學校名稱:{{schoolName}}</h2>
+            <h2>學校地址:{{address}}</h2>
+            <student></student>
+        </div>
+        `,
+        data(){
+            return {
+            schoolName:'汩汩',
+            address:'北京',
+            }    
+        },
+        //註冊組建(局部註冊)
+        components:{
+            student
+        }     
+    })
+    //定義 hello組件
+    let hello = Vue.extend({
+        template:`<h1>{{msg}}</h1>`,
+        data(){
+            return{
+                msg:'歡迎來學習!'
+            }
+        }
+    })
+    //定義app組件
+    let app = Vue.extend({
+        template:`<div>
+                    <hello> </hello>
+                    <school></school>
+            
+                 </div>`,
+        components:{
+            school,
+            hello
+        }  
+    })
+    //創建vm
+    let vm = new Vue({
+        template:'<app></app>',
+        el:'#root',
+        //註冊組建(局部註冊)
+        components:{
+            app
+        },
+        
+    })
+    
+</script>
+</html>
+</body>
+</html>
